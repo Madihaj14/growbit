@@ -154,8 +154,14 @@ export default {
 					'100%': { transform: 'scale(1)', opacity: '1' }
 				},
 				'ripple': {
-					'0%': { transform: 'scale(0)', opacity: '1' },
-					'100%': { transform: 'scale(4)', opacity: '0' }
+					'0%': { 
+						transform: 'scale(0)',
+						opacity: '0.4'
+					},
+					'100%': { 
+						transform: 'scale(100)',
+						opacity: '0'
+					}
 				},
 				'blob-move': {
 					'0%, 100%': { borderRadius: '60% 40% 30% 70%/60% 30% 70% 40%' },
@@ -175,7 +181,7 @@ export default {
 				'shake-soft': 'shake-soft 0.5s ease-in-out',
 				'slide-in-bottom': 'slide-in-bottom 0.4s ease-out',
 				'scale-fade-in': 'scale-fade-in 0.3s ease-out',
-				'ripple': 'ripple 0.8s ease-out',
+				'ripple': 'ripple 2s ease-out forwards',
 				'blob-move': 'blob-move 25s ease-in-out infinite',
 				// Combined animations
 				'check-complete': 'scale-fade-in 0.3s ease-out, sparkle 0.8s ease-in-out forwards',

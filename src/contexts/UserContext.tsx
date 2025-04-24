@@ -1,4 +1,3 @@
-
 import { createContext, useState, useContext, ReactNode, useEffect } from 'react';
 
 // Types
@@ -18,6 +17,7 @@ export interface Badge {
 export interface User {
   id: string;
   name: string;
+  email: string;
   avatar?: string;
   level: number;
   xp: number;
@@ -28,6 +28,7 @@ export interface User {
   friends: string[];
   joinedAt: string;
   theme: 'light' | 'dark';
+  notificationsEnabled?: boolean;
 }
 
 interface UserContextType {
@@ -96,6 +97,7 @@ const defaultBadges: Badge[] = [
 const initialUser: User = {
   id: '1',
   name: 'Demo User',
+  email: 'user@example.com',
   avatar: '',
   level: 1,
   xp: 0,
@@ -105,12 +107,12 @@ const initialUser: User = {
   badges: defaultBadges,
   friends: [],
   joinedAt: new Date().toISOString(),
-  theme: 'light'
+  theme: 'light',
+  notificationsEnabled: true
 };
 
 // Helper function to calculate level and XP needed for next level
 const calculateLevel = (xp: number): { level: number, xpToNextLevel: number } => {
-  // Simple leveling formula: each level needs level*100 XP
   let level = 1;
   let xpNeeded = 100;
   let remainingXp = xp;
@@ -129,16 +131,13 @@ const calculateLevel = (xp: number): { level: number, xpToNextLevel: number } =>
 
 export const UserProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User>(() => {
-    // Load user data from localStorage if available
     const storedUser = localStorage.getItem('user');
     return storedUser ? JSON.parse(storedUser) : initialUser;
   });
 
-  // Save user data to localStorage whenever it changes
   useEffect(() => {
     localStorage.setItem('user', JSON.stringify(user));
     
-    // Apply theme from user preferences
     document.documentElement.classList.toggle('dark', user.theme === 'dark');
   }, [user]);
 
@@ -154,7 +153,6 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
       const newXp = prevUser.xp + amount;
       const { level, xpToNextLevel } = calculateLevel(newXp);
       
-      // Check for XP-based badge unlocks
       const updatedBadges = prevUser.badges.map(badge => {
         if (!badge.unlocked && badge.requirement.type === 'xp' && newXp >= badge.requirement.value) {
           return {
@@ -216,7 +214,6 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
-// Custom hook to use the user context
 export const useUser = () => {
   const context = useContext(UserContext);
   if (context === undefined) {
