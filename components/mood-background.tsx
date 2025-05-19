@@ -11,36 +11,84 @@ interface MoodBackgroundProps {
 }
 
 export function MoodBackground({ mood }: MoodBackgroundProps) {
-  const [bgClass, setBgClass] = useState("bg-gradient-to-br from-slate-300 to-slate-400");
-  const [darkBgClass, setDarkBgClass] = useState("dark:from-slate-900 dark:to-slate-800");
+  const [bgClass, setBgClass] = useState("from-slate-900 to-slate-800");
   
   useEffect(() => {
     switch (mood) {
       case "romantic":
-        setBgClass("bg-gradient-to-br from-rose-300 to-pink-300");
-        setDarkBgClass("dark:from-rose-950/30 dark:to-pink-950/30");
+        setBgClass("from-rose-950/30 to-pink-950/30");
         break;
       case "happy":
-        setBgClass("bg-gradient-to-br from-yellow-300 to-amber-300");
-        setDarkBgClass("dark:from-yellow-950/30 dark:to-amber-950/30");
+        setBgClass("from-yellow-950/30 to-amber-950/30");
         break;
       case "sad":
-        setBgClass("bg-gradient-to-br from-blue-300 to-indigo-300");
-        setDarkBgClass("dark:from-blue-950/30 dark:to-indigo-950/30");
+        setBgClass("from-blue-950/30 to-indigo-950/30");
         break;
       case "motivational":
-        setBgClass("bg-gradient-to-br from-green-300 to-emerald-300");
-        setDarkBgClass("dark:from-green-950/30 dark:to-emerald-950/30");
+        setBgClass("from-green-950/30 to-emerald-950/30");
         break;
       case "party":
-        setBgClass("bg-gradient-to-br from-purple-300 to-fuchsia-300");
-        setDarkBgClass("dark:from-purple-950/30 dark:to-fuchsia-950/30");
+        setBgClass("from-purple-950/30 to-fuchsia-950/30");
         break;
       default:
-        setBgClass("bg-gradient-to-br from-slate-300 to-slate-400");
-        setDarkBgClass("dark:from-slate-900 dark:to-slate-800");
+        setBgClass("from-slate-900 to-slate-800");
     }
   }, [mood]);
+
+  const floatingAnimation = {
+    y: [0, -100],
+    x: [-20, 20],
+    rotate: [0, 360],
+    transition: {
+      duration: 8,
+      ease: "linear",
+      repeat: Infinity,
+    }
+  };
+
+  const waveAnimation = {
+    y: [0, -200],
+    x: [-20, 20],
+    rotate: [0, 360],
+    transition: {
+      duration: 6,
+      ease: "linear",
+      repeat: Infinity,
+    }
+  };
+
+  const rainAnimation = {
+    y: ["-100%", "100vh"],
+    x: [0, 100],
+    opacity: [0.4, 0],
+    transition: {
+      duration: 2,
+      ease: "linear",
+      repeat: Infinity,
+    }
+  };
+
+  const flameAnimation = {
+    y: [0, -200],
+    rotate: [0, 360],
+    scale: [1, 1.2],
+    transition: {
+      duration: 4,
+      ease: "linear",
+      repeat: Infinity,
+    }
+  };
+
+  const partyAnimation = {
+    y: [0, -300],
+    rotate: [0, 360],
+    scale: [1, 1.2],
+    transition: {
+      duration: 5,
+      ease: "linear",
+      repeat: Infinity,
+    }
+  };
 
   return (
     <AnimatePresence mode="wait">
@@ -51,9 +99,8 @@ export function MoodBackground({ mood }: MoodBackgroundProps) {
         exit={{ opacity: 0 }}
         transition={{ duration: 0.5 }}
         className={cn(
-          "fixed inset-0 -z-10 transition-all duration-500 overflow-hidden",
-          bgClass,
-          darkBgClass
+          "fixed inset-0 -z-10 bg-gradient-to-br transition-all duration-500 overflow-hidden",
+          bgClass
         )}
       >
         {/* Floating Musical Notes (Always visible) */}
@@ -62,25 +109,20 @@ export function MoodBackground({ mood }: MoodBackgroundProps) {
             <motion.div
               key={`note-${i}`}
               className="absolute"
-              initial={{ scale: 0 }}
-              animate={{
-                y: [0, -100, 0],
-                x: [0, Math.sin((i / 15) * Math.PI * 2) * 50, 0],
-                rotate: [0, 360],
-                scale: [1, 1.2, 1],
-              }}
+              initial={{ opacity: 0.4 }}
+              animate={floatingAnimation}
               transition={{
                 duration: 8,
                 delay: i * 0.5,
                 repeat: Infinity,
-                ease: "easeInOut",
+                ease: "linear",
               }}
               style={{
                 left: `${(i % 5) * 20 + 10}%`,
                 top: `${Math.floor(i / 5) * 30 + 10}%`,
               }}
             >
-              <Music className="w-6 h-6 text-primary/20" />
+              <Music className="w-6 h-6 text-white/20" />
             </motion.div>
           ))}
         </div>
@@ -91,17 +133,13 @@ export function MoodBackground({ mood }: MoodBackgroundProps) {
             {Array.from({ length: 12 }).map((_, i) => (
               <motion.div
                 key={i}
-                className="absolute text-rose-500/40 dark:text-rose-500/30"
-                animate={{
-                  y: [0, -30, 0],
-                  rotate: [0, 360],
-                  scale: [1, 1.2, 1],
-                }}
+                className="absolute text-rose-500/40"
+                animate={waveAnimation}
                 transition={{
-                  duration: 4,
+                  duration: 6,
                   delay: i * 0.3,
                   repeat: Infinity,
-                  ease: "easeInOut",
+                  ease: "linear",
                 }}
                 style={{
                   left: `${(i % 4) * 25}%`,
@@ -121,23 +159,19 @@ export function MoodBackground({ mood }: MoodBackgroundProps) {
               <motion.div
                 key={i}
                 className="absolute"
-                animate={{
-                  y: [0, -40, 0],
-                  scale: [1, 1.2, 1],
-                  rotate: [0, 10, -10, 0],
-                }}
+                animate={waveAnimation}
                 transition={{
-                  duration: 3,
+                  duration: 6,
                   delay: i * 0.2,
                   repeat: Infinity,
-                  ease: "easeInOut",
+                  ease: "linear",
                 }}
                 style={{
                   left: `${(i % 4) * 25}%`,
                   top: `${Math.floor(i / 4) * 30}%`,
                 }}
               >
-                <Smile className="w-8 h-8 text-yellow-500/40 dark:text-yellow-500/30" />
+                <Smile className="w-8 h-8 text-yellow-500/40" />
               </motion.div>
             ))}
           </div>
@@ -145,14 +179,11 @@ export function MoodBackground({ mood }: MoodBackgroundProps) {
 
         {mood === "sad" && (
           <div className="absolute inset-0">
-            {Array.from({ length: 20 }).map((_, i) => (
+            {Array.from({ length: 30 }).map((_, i) => (
               <motion.div
                 key={i}
-                className="absolute text-blue-500/40 dark:text-blue-500/30"
-                animate={{
-                  y: ["-100%", "100vh"],
-                  opacity: [0, 1, 0],
-                }}
+                className="absolute text-blue-500/40"
+                animate={rainAnimation}
                 transition={{
                   duration: 2,
                   delay: i * 0.1,
@@ -161,7 +192,7 @@ export function MoodBackground({ mood }: MoodBackgroundProps) {
                 }}
                 style={{
                   left: `${(i % 10) * 10}%`,
-                  fontSize: "1.5rem",
+                  fontSize: "0.75rem",
                 }}
               >
                 💧
@@ -172,21 +203,20 @@ export function MoodBackground({ mood }: MoodBackgroundProps) {
                 key={`cloud-${i}`}
                 className="absolute"
                 animate={{
-                  x: ["-10%", "10%"],
+                  x: [-100, 100],
                 }}
                 transition={{
-                  duration: 8,
+                  duration: 12,
                   delay: i * 1,
                   repeat: Infinity,
-                  repeatType: "reverse",
-                  ease: "easeInOut",
+                  ease: "linear",
                 }}
                 style={{
                   left: `${i * 20}%`,
                   top: `${(i % 3) * 15}%`,
                 }}
               >
-                <Cloud className="w-12 h-12 text-blue-400/30 dark:text-blue-400/20" />
+                <Cloud className="w-12 h-12 text-blue-400/30" />
               </motion.div>
             ))}
           </div>
@@ -198,23 +228,19 @@ export function MoodBackground({ mood }: MoodBackgroundProps) {
               <motion.div
                 key={i}
                 className="absolute"
-                animate={{
-                  scale: [1, 1.3, 1],
-                  y: [0, -30, 0],
-                  rotate: [0, 15, -15, 0],
-                }}
+                animate={flameAnimation}
                 transition={{
-                  duration: 2,
+                  duration: 4,
                   delay: i * 0.2,
                   repeat: Infinity,
-                  ease: "easeInOut",
+                  ease: "linear",
                 }}
                 style={{
                   left: `${(i % 4) * 25}%`,
                   top: `${Math.floor(i / 4) * 30}%`,
                 }}
               >
-                <Flame className="w-8 h-8 text-emerald-500/40 dark:text-emerald-500/30" />
+                <Flame className="w-8 h-8 text-emerald-500/40" />
               </motion.div>
             ))}
           </div>
@@ -226,23 +252,19 @@ export function MoodBackground({ mood }: MoodBackgroundProps) {
               <motion.div
                 key={i}
                 className="absolute"
-                animate={{
-                  y: [0, -50, 0],
-                  rotate: [0, 360],
-                  scale: [1, 1.2, 1],
-                }}
+                animate={partyAnimation}
                 transition={{
-                  duration: 3,
+                  duration: 5,
                   delay: i * 0.2,
                   repeat: Infinity,
-                  ease: "easeInOut",
+                  ease: "linear",
                 }}
                 style={{
                   left: `${(i % 5) * 20}%`,
                   top: `${Math.floor(i / 5) * 30}%`,
                 }}
               >
-                <PartyPopper className="w-8 h-8 text-purple-500/40 dark:text-purple-500/30" />
+                <PartyPopper className="w-8 h-8 text-purple-500/40" />
               </motion.div>
             ))}
           </div>

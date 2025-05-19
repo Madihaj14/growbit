@@ -39,22 +39,22 @@ export default function Home() {
     <>
       <MoodBackground mood={selectedMood} />
       
-      <div className="container py-12">
+      <div className="container mx-auto px-4 md:px-6 lg:px-8 max-w-7xl py-12 min-h-[calc(100vh-8rem)]">
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="mb-12 text-center"
+          className="mb-16 text-center max-w-3xl mx-auto"
         >
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
             MoodJukebox
           </h1>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-lg md:text-xl text-muted-foreground">
             Discover Bollywood music that matches exactly how you feel. Select your mood and let us curate the perfect playlist for you.
           </p>
         </motion.div>
         
-        <section className="mb-12">
+        <section className="mb-16 max-w-4xl mx-auto">
           <MoodSelector 
             onMoodSelect={handleMoodSelect} 
             selectedMood={selectedMood}
@@ -66,6 +66,7 @@ export default function Home() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.3 }}
+            className="max-w-7xl mx-auto"
           >
             <TrackList 
               tracks={tracks}

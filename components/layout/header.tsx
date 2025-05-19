@@ -11,7 +11,6 @@ export function Header() {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
-  // Avoid hydration mismatch by only rendering theme toggle after mount
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -31,7 +30,7 @@ export function Header() {
           >
             <Music className="h-6 w-6 text-primary" />
           </motion.div>
-          <h1 className="text-xl font-bold">MoodJukebox</h1>
+          <h1 className="text-xl font-bold tracking-wide">MoodJukebox</h1>
         </div>
         
         {mounted && (
