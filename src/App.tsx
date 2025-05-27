@@ -7,7 +7,7 @@ import { HabitProvider } from "./contexts/HabitContext";
 import { UserProvider } from "./contexts/UserContext";
 import Dashboard from "./pages/Dashboard";
 import HabitForm from "./pages/HabitForm";
-import HabitStats from "./pages/HabitStats"; // Add import for HabitStats
+import HabitStats from "./pages/HabitStats";
 import Profile from "./pages/Profile";
 import Settings from "./pages/Settings";
 import Auth from "./pages/Auth";
@@ -81,7 +81,6 @@ const App = () => {
                   )
                 }
               />
-              {/* Add Route for HabitStats */}
               <Route
                 path="/stats"
                 element={

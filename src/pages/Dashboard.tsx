@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useHabits } from "@/contexts/HabitContext";
 import { useUser } from "@/contexts/UserContext";
 import HabitCard from "@/components/habits/HabitCard";
-import { Award, TrendingUp, Calendar, Star, Plus, BarChart } from "lucide-react";
+import { Award, TrendingUp, Calendar, Star, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const Dashboard = () => {
@@ -37,20 +37,12 @@ const Dashboard = () => {
             )}
           </p>
         </div>
-        <div className="flex gap-2">
-          <Link to="/stats">
-            <Button variant="outline" className="gap-2">
-              <BarChart size={16} />
-              Statistics
-            </Button>
-          </Link>
-          <Link to="/habits/new">
-            <Button className="gap-2">
-              <Plus size={16} />
-              New Habit
-            </Button>
-          </Link>
-        </div>
+        <Link to="/habits/new">
+          <Button className="gap-2">
+            <Plus size={16} />
+            New Habit
+          </Button>
+        </Link>
       </div>
 
       {/* Stats cards */}

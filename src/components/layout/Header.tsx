@@ -1,27 +1,29 @@
 
 import { Link } from "react-router-dom";
-import { Home } from "lucide-react";
+import { BarChart3 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ProfileMenu from "./ProfileMenu";
 
 const Header = () => {
   return (
-    <header className="growbit-header">
-      <div className="growbit-container py-4 flex items-center justify-between">
-        <Link to="/" className="flex items-center gap-2">
-          <span className="w-8 h-8 rounded-full bg-growbit-primary flex items-center justify-center text-white font-bold">G</span>
-          <span className="text-xl font-bold bg-gradient-to-r from-growbit-primary to-growbit-success bg-clip-text text-transparent">
-            Growbit
-          </span>
-        </Link>
-
-        <div className="flex items-center gap-4">
-          <Button variant="ghost" size="icon" asChild>
-            <Link to="/">
-              <Home className="h-5 w-5" />
+    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <div className="container flex h-14 items-center">        
+        <div className="flex flex-1 items-center justify-between space-x-2">
+          <div className="flex items-center space-x-2">
+            <Link to="/" className="font-bold text-xl">
+              GrowBit
             </Link>
-          </Button>
-          <ProfileMenu />
+          </div>
+          
+          <div className="flex items-center space-x-4">
+            <Link to="/stats">
+              <Button variant="ghost" size="sm" className="gap-2">
+                <BarChart3 className="h-4 w-4" />
+                <span className="hidden sm:inline">Stats</span>
+              </Button>
+            </Link>
+            <ProfileMenu />
+          </div>
         </div>
       </div>
     </header>
