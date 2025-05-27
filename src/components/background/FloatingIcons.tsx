@@ -1,6 +1,6 @@
 
 import { motion } from "framer-motion";
-import { Star, Leaf, Sparkles, Bug, Flower2 } from "lucide-react";
+import { Star, Leaf, Sparkles, Flower2 } from "lucide-react";
 
 const FloatingIcons = () => {
   return (
@@ -20,22 +20,6 @@ const FloatingIcons = () => {
         }}
       >
         <Star size={24} className="text-amber-400/80" fill="rgba(251, 191, 36, 0.3)" strokeWidth={1.5} />
-      </motion.div>
-
-      {/* Bug 1 (replacing Butterfly 1) */}
-      <motion.div 
-        className="absolute top-[25%] right-[15%]"
-        animate={{
-          y: [0, -15, 0],
-          rotate: [0, 10, 0],
-        }}
-        transition={{
-          duration: 12,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      >
-        <Bug size={40} className="text-amber-500/70" strokeWidth={1.5} />
       </motion.div>
 
       {/* Leaf 1 */}
@@ -71,7 +55,7 @@ const FloatingIcons = () => {
         <Sparkles size={28} className="text-blue-400/80" strokeWidth={1.5} />
       </motion.div>
 
-      {/* Flower2 (replacing Butterfly 2) */}
+      {/* Flower2 */}
       <motion.div 
         className="absolute bottom-[20%] left-[20%]"
         animate={{
@@ -103,23 +87,6 @@ const FloatingIcons = () => {
         }}
       >
         <Star size={20} className="text-amber-300/70" fill="rgba(251, 191, 36, 0.3)" strokeWidth={1.5} />
-      </motion.div>
-
-      {/* Bug 2 (replacing Butterfly 3) */}
-      <motion.div 
-        className="absolute top-[45%] right-[30%]"
-        animate={{
-          y: [0, -10, 0],
-          x: [0, 8, 0],
-          rotate: [-5, 5, -5],
-        }}
-        transition={{
-          duration: 18,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      >
-        <Bug size={24} className="text-yellow-400/80" strokeWidth={1.5} transform="rotate(180)" />
       </motion.div>
     </div>
   );
