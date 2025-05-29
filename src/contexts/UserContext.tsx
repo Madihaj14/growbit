@@ -29,6 +29,9 @@ export interface User {
   joinedAt: string;
   theme: 'light' | 'dark';
   notificationsEnabled?: boolean;
+  emailNotifications?: boolean;
+  soundEffects?: boolean;
+  autoSave?: boolean;
 }
 
 interface UserContextType {
@@ -108,7 +111,10 @@ const initialUser: User = {
   friends: [],
   joinedAt: new Date().toISOString(),
   theme: 'light',
-  notificationsEnabled: true
+  notificationsEnabled: true,
+  emailNotifications: true,
+  soundEffects: true,
+  autoSave: true
 };
 
 // Helper function to calculate level and XP needed for next level

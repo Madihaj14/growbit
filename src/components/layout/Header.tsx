@@ -1,10 +1,13 @@
 
 import { Link } from "react-router-dom";
-import { BarChart3 } from "lucide-react";
+import { BarChart3, Moon, Sun } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useUser } from "@/contexts/UserContext";
 import ProfileMenu from "./ProfileMenu";
 
 const Header = () => {
+  const { user, toggleTheme } = useUser();
+
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-14 items-center">        
@@ -22,6 +25,23 @@ const Header = () => {
                 <span className="hidden sm:inline">Stats</span>
               </Button>
             </Link>
+            
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              onClick={toggleTheme}
+              className="gap-2"
+            >
+              {user.theme === 'dark' ? (
+                <Sun className="h-4 w-4" />
+              ) : (
+                <Moon className="h-4 w-4" />
+              )}
+              <span className="hidden sm:inline">
+                {user.theme === 'dark' ? 'Light' : 'Dark'}
+              </span>
+            </Button>
+            
             <ProfileMenu />
           </div>
         </div>

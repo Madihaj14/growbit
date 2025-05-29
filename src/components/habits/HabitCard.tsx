@@ -112,7 +112,7 @@ const HabitCard = ({ habit }: HabitCardProps) => {
   return (
     <motion.div
       id={`habit-${habit.id}`}
-      className="habit-card relative bg-white rounded-xl p-5 shadow-sm border border-gray-100"
+      className="habit-card relative bg-white dark:bg-gray-800 rounded-xl p-5 shadow-sm border border-gray-100 dark:border-gray-700"
       initial="initial"
       animate="animate"
       exit="exit"
@@ -130,43 +130,43 @@ const HabitCard = ({ habit }: HabitCardProps) => {
       <div className="pl-3">
         <div className="flex justify-between items-start mb-3">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-2xl">
+            <div className="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center text-2xl">
               {habit.icon || "📝"}
             </div>
             <div>
-              <h3 className="font-medium text-growbit-text-primary">{habit.name}</h3>
+              <h3 className="font-medium text-growbit-text-primary dark:text-white">{habit.name}</h3>
               {habit.description && (
-                <p className="text-sm text-growbit-text-secondary">{habit.description}</p>
+                <p className="text-sm text-growbit-text-secondary dark:text-gray-400">{habit.description}</p>
               )}
             </div>
           </div>
           
           <div className="relative">
             <button 
-              className="p-2 rounded-full hover:bg-gray-100 transition-colors"
+              className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
               onClick={() => setShowMenu(!showMenu)}
             >
-              <MoreVertical size={18} className="text-growbit-text-secondary" />
+              <MoreVertical size={18} className="text-growbit-text-secondary dark:text-gray-400" />
             </button>
 
             {/* Dropdown menu */}
             {showMenu && (
               <motion.div 
-                className="absolute right-0 top-full mt-1 bg-white shadow-md rounded-md py-1 z-10 w-40 border border-gray-100"
+                className="absolute right-0 top-full mt-1 bg-white dark:bg-gray-800 shadow-md rounded-md py-1 z-10 w-40 border border-gray-100 dark:border-gray-700"
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
               >
-                <button className="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 flex items-center gap-2">
+                <button className="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 dark:hover:bg-gray-700 dark:text-white flex items-center gap-2">
                   <Edit size={16} />
                   Edit Habit
                 </button>
-                <button className="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 flex items-center gap-2">
+                <button className="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 dark:hover:bg-gray-700 dark:text-white flex items-center gap-2">
                   <Calendar size={16} />
                   View History
                 </button>
                 <button 
-                  className="w-full text-left px-4 py-2 text-sm text-red-500 hover:bg-red-50 flex items-center gap-2"
+                  className="w-full text-left px-4 py-2 text-sm text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 flex items-center gap-2"
                   onClick={() => {
                     setShowDeleteConfirm(true);
                     setShowMenu(false);
@@ -183,27 +183,27 @@ const HabitCard = ({ habit }: HabitCardProps) => {
         {/* Additional details */}
         <div className="flex flex-wrap gap-2 mb-3">
           {habit.category && (
-            <span className="text-xs px-2 py-1 bg-gray-100 rounded-full text-gray-600">
+            <span className="text-xs px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded-full text-gray-600 dark:text-gray-300">
               {habit.category}
             </span>
           )}
-          <span className="text-xs px-2 py-1 bg-gray-100 rounded-full text-gray-600 flex items-center gap-1">
+          <span className="text-xs px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded-full text-gray-600 dark:text-gray-300 flex items-center gap-1">
             <CalendarClock size={12} />
             {getFrequencyText()}
           </span>
-          <span className="text-xs px-2 py-1 bg-gray-100 rounded-full text-gray-600">
+          <span className="text-xs px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded-full text-gray-600 dark:text-gray-300">
             {getDifficultyStars()}
           </span>
         </div>
         
         {/* Streak info */}
         <div className="flex items-center gap-2 mb-4">
-          <span className={`streak-counter ${isCurrentlyActive ? 'text-growbit-accent' : 'text-growbit-text-disabled'}`}>
+          <span className={`streak-counter ${isCurrentlyActive ? 'text-growbit-accent' : 'text-growbit-text-disabled dark:text-gray-500'}`}>
             🔥 {habit.streak} day{habit.streak !== 1 ? 's' : ''}
           </span>
           
           {habit.bestStreak > 0 && habit.bestStreak > habit.streak && (
-            <span className="text-xs text-growbit-text-secondary">
+            <span className="text-xs text-growbit-text-secondary dark:text-gray-400">
               (Best: {habit.bestStreak})
             </span>
           )}
@@ -211,7 +211,7 @@ const HabitCard = ({ habit }: HabitCardProps) => {
         
         {/* Status and complete button */}
         <div className="flex justify-between items-center">
-          <div className="text-xs text-growbit-text-secondary">
+          <div className="text-xs text-growbit-text-secondary dark:text-gray-400">
             {lastCompletedDate ? (
               <>Last done: {formatDistanceToNow(new Date(lastCompletedDate), { addSuffix: true })}</>
             ) : (
@@ -221,7 +221,7 @@ const HabitCard = ({ habit }: HabitCardProps) => {
 
           <motion.button
             className={`w-12 h-12 rounded-full flex items-center justify-center relative overflow-hidden ${
-              habit.completedToday ? 'bg-growbit-primary/10' : 'bg-gray-100 hover:bg-gray-200'
+              habit.completedToday ? 'bg-growbit-primary/10 dark:bg-growbit-primary/20' : 'bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600'
             } transition-colors duration-200`}
             onClick={handleComplete}
             whileTap={{ scale: 0.9 }}
@@ -229,7 +229,7 @@ const HabitCard = ({ habit }: HabitCardProps) => {
             {habit.completedToday ? (
               <CheckCircle size={24} className="text-growbit-primary" />
             ) : (
-              <Circle size={24} className="text-growbit-text-secondary" />
+              <Circle size={24} className="text-growbit-text-secondary dark:text-gray-400" />
             )}
             
             {/* Ripple effect */}
@@ -248,19 +248,19 @@ const HabitCard = ({ habit }: HabitCardProps) => {
           onClick={() => setShowDeleteConfirm(false)}
         >
           <motion.div 
-            className="bg-white rounded-xl p-6 shadow-xl max-w-sm w-full mx-4"
+            className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-xl max-w-sm w-full mx-4"
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.9, opacity: 0 }}
             onClick={(e) => e.stopPropagation()}
           >
-            <h3 className="text-xl font-medium mb-2">Delete Habit</h3>
-            <p className="text-growbit-text-secondary mb-4">
+            <h3 className="text-xl font-medium mb-2 dark:text-white">Delete Habit</h3>
+            <p className="text-growbit-text-secondary dark:text-gray-400 mb-4">
               Are you sure you want to delete "{habit.name}"? This action cannot be undone.
             </p>
             <div className="flex gap-3 justify-end">
               <button 
-                className="px-4 py-2 rounded-lg border border-gray-300 hover:bg-gray-50"
+                className="px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 dark:text-white"
                 onClick={() => setShowDeleteConfirm(false)}
               >
                 Cancel
