@@ -1,2 +1,2 @@
 GROWBIT
-It is a Habit Tracker for people who procastinate and wants to bring a change in their life.
+It is a Habit Tracker for people to track their daily habits.
