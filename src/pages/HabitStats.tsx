@@ -21,7 +21,7 @@ import { Calendar, TrendingUp, Target, Award } from "lucide-react";
 import { format, subDays, eachDayOfInterval } from "date-fns";
 
 const HabitStats = () => {
-  const { habits, getTotalXp } = useHabits();
+  const { habits } = useHabits();
 
   // Calculate completion rate over last 30 days
   const getLast30DaysData = () => {
@@ -70,7 +70,6 @@ const HabitStats = () => {
   const averageStreak = habits.length > 0 ? 
     Math.round(habits.reduce((sum, habit) => sum + habit.streak, 0) / habits.length) : 0;
   const longestStreak = habits.reduce((max, habit) => Math.max(max, habit.bestStreak), 0);
-  const totalXp = getTotalXp();
 
   const last30DaysData = getLast30DaysData();
   const categoryData = getCategoryData();
@@ -113,7 +112,7 @@ const HabitStats = () => {
       </div>
 
       {/* Stats Overview */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Total Completions</CardTitle>
@@ -144,17 +143,6 @@ const HabitStats = () => {
           <CardContent>
             <div className="text-2xl font-bold">{longestStreak} days</div>
             <p className="text-xs text-muted-foreground">Personal best</p>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total XP</CardTitle>
-            <Calendar className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{totalXp}</div>
-            <p className="text-xs text-muted-foreground">Experience points</p>
           </CardContent>
         </Card>
       </div>

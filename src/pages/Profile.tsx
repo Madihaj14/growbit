@@ -44,7 +44,7 @@ const Profile = () => {
 
       <Card className="p-6">
         <h2 className="text-xl font-semibold mb-4">Stats</h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
           <div className="text-center p-4 bg-muted rounded-lg">
             <div className="text-2xl font-bold">{user.totalHabitsCompleted}</div>
             <div className="text-sm text-muted-foreground">Habits Completed</div>
@@ -56,10 +56,6 @@ const Profile = () => {
           <div className="text-center p-4 bg-muted rounded-lg">
             <div className="text-2xl font-bold">{user.level}</div>
             <div className="text-sm text-muted-foreground">Level</div>
-          </div>
-          <div className="text-center p-4 bg-muted rounded-lg">
-            <div className="text-2xl font-bold">{user.xp}</div>
-            <div className="text-sm text-muted-foreground">Total XP</div>
           </div>
         </div>
       </Card>

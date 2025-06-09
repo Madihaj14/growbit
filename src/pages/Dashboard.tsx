@@ -4,13 +4,13 @@ import { Link } from "react-router-dom";
 import { useHabits } from "@/contexts/HabitContext";
 import { useUser } from "@/contexts/UserContext";
 import HabitCard from "@/components/habits/HabitCard";
-import { Award, TrendingUp, Calendar, Star, Plus } from "lucide-react";
+import { Award, TrendingUp, Calendar, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 
 const Dashboard = () => {
-  const { habits, getTotalXp } = useHabits();
+  const { habits } = useHabits();
   const { user } = useUser();
 
   // Fetch user profile from Supabase
@@ -37,7 +37,6 @@ const Dashboard = () => {
   const totalHabits = habits.length;
   const todayPercent = totalHabits > 0 ? Math.round((completedToday / totalHabits) * 100) : 0;
   const longestStreak = habits.reduce((max, habit) => Math.max(max, habit.streak), 0);
-  const totalXp = getTotalXp();
 
   return (
     <motion.div
@@ -67,7 +66,7 @@ const Dashboard = () => {
       </div>
 
       {/* Stats cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <motion.div 
           className="bg-white dark:bg-gray-800 rounded-xl p-5 shadow-sm border border-gray-100 dark:border-gray-700 flex flex-col items-center"
           whileHover={{ y: -5, boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.1)" }}
@@ -93,30 +92,6 @@ const Dashboard = () => {
           className="bg-white dark:bg-gray-800 rounded-xl p-5 shadow-sm border border-gray-100 dark:border-gray-700 flex flex-col items-center"
           whileHover={{ y: -5, boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.1)" }}
         >
-          <div className="w-12 h-12 rounded-full bg-growbit-accent/10 dark:bg-growbit-accent/20 flex items-center justify-center mb-3">
-            <Star className="text-growbit-accent" />
-          </div>
-          <h3 className="text-xl font-bold text-gray-900 dark:text-white">Level {user.level}</h3>
-          <p className="text-sm text-growbit-text-secondary dark:text-gray-400">Current Level</p>
-          
-          {/* XP Progress bar */}
-          <div className="w-full h-2 bg-gray-100 dark:bg-gray-700 rounded-full mt-3 overflow-hidden">
-            <motion.div 
-              className="h-full bg-growbit-accent rounded-full"
-              initial={{ width: 0 }}
-              animate={{ width: `${100 - (user.xpToNextLevel / (user.level * 100) * 100)}%` }}
-              transition={{ duration: 1, ease: "easeOut" }}
-            />
-          </div>
-          <p className="text-xs text-growbit-text-secondary dark:text-gray-400 mt-2">
-            {user.xpToNextLevel} XP to next level
-          </p>
-        </motion.div>
-
-        <motion.div 
-          className="bg-white dark:bg-gray-800 rounded-xl p-5 shadow-sm border border-gray-100 dark:border-gray-700 flex flex-col items-center"
-          whileHover={{ y: -5, boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.1)" }}
-        >
           <div className="w-12 h-12 rounded-full bg-zen-mint/30 dark:bg-zen-mint/20 flex items-center justify-center mb-3">
             <TrendingUp className="text-growbit-success" />
           </div>
@@ -131,8 +106,8 @@ const Dashboard = () => {
           <div className="w-12 h-12 rounded-full bg-zen-blue/30 dark:bg-zen-blue/20 flex items-center justify-center mb-3">
             <Award className="text-blue-500" />
           </div>
-          <h3 className="text-xl font-bold text-gray-900 dark:text-white">{totalXp} XP</h3>
-          <p className="text-sm text-growbit-text-secondary dark:text-gray-400">Total Experience</p>
+          <h3 className="text-xl font-bold text-gray-900 dark:text-white">{user.totalHabitsCompleted}</h3>
+          <p className="text-sm text-growbit-text-secondary dark:text-gray-400">Total Completions</p>
         </motion.div>
       </div>
 

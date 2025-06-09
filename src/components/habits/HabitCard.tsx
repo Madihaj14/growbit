@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { 
@@ -19,7 +18,6 @@ interface HabitCardProps {
 const HabitCard = ({ habit }: HabitCardProps) => {
   const navigate = useNavigate();
   const { completeHabit, uncompleteHabit, deleteHabit, getStreakInfo } = useHabits();
-  const { addXp } = useUser();
   const [showMenu, setShowMenu] = useState(false);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const { isCurrentlyActive, lastCompletedDate } = getStreakInfo(habit);

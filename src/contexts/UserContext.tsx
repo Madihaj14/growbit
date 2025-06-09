@@ -1,3 +1,4 @@
+
 import { createContext, useState, useContext, ReactNode, useEffect } from 'react';
 
 // Types
@@ -9,7 +10,7 @@ export interface Badge {
   unlocked: boolean;
   unlockedAt?: string;
   requirement: {
-    type: 'streak' | 'completion' | 'xp';
+    type: 'streak' | 'completion';
     value: number;
   };
 }
@@ -20,8 +21,6 @@ export interface User {
   email: string;
   avatar?: string;
   level: number;
-  xp: number;
-  xpToNextLevel: number;
   totalHabitsCompleted: number;
   longestStreak: number;
   badges: Badge[];
@@ -32,12 +31,17 @@ export interface User {
   emailNotifications?: boolean;
   soundEffects?: boolean;
   autoSave?: boolean;
+  language?: string;
+  timezone?: string;
+  weekStartsOn?: 'monday' | 'sunday';
+  privacyMode?: boolean;
+  dataExport?: boolean;
+  accountDeletion?: boolean;
 }
 
 interface UserContextType {
   user: User;
   updateUser: (updates: Partial<User>) => void;
-  addXp: (amount: number) => void;
   unlockBadge: (badgeId: string) => void;
   toggleTheme: () => void;
 }
@@ -71,22 +75,6 @@ const defaultBadges: Badge[] = [
     requirement: { type: 'streak', value: 30 }
   },
   {
-    id: 'xp-500',
-    name: 'Rising Star',
-    description: 'Earned 500 XP',
-    icon: '⭐',
-    unlocked: false,
-    requirement: { type: 'xp', value: 500 }
-  },
-  {
-    id: 'xp-1000',
-    name: 'Growth Expert',
-    description: 'Earned 1000 XP',
-    icon: '🌟',
-    unlocked: false,
-    requirement: { type: 'xp', value: 1000 }
-  },
-  {
     id: 'completions-100',
     name: 'Century Club',
     description: 'Completed habits 100 times',
@@ -103,8 +91,6 @@ const initialUser: User = {
   email: 'user@example.com',
   avatar: '',
   level: 1,
-  xp: 0,
-  xpToNextLevel: 100,
   totalHabitsCompleted: 0,
   longestStreak: 0,
   badges: defaultBadges,
@@ -114,25 +100,13 @@ const initialUser: User = {
   notificationsEnabled: true,
   emailNotifications: true,
   soundEffects: true,
-  autoSave: true
-};
-
-// Helper function to calculate level and XP needed for next level
-const calculateLevel = (xp: number): { level: number, xpToNextLevel: number } => {
-  let level = 1;
-  let xpNeeded = 100;
-  let remainingXp = xp;
-  
-  while (remainingXp >= xpNeeded) {
-    remainingXp -= xpNeeded;
-    level += 1;
-    xpNeeded = level * 100;
-  }
-  
-  return {
-    level,
-    xpToNextLevel: xpNeeded - remainingXp
-  };
+  autoSave: true,
+  language: 'english',
+  timezone: 'UTC',
+  weekStartsOn: 'monday',
+  privacyMode: false,
+  dataExport: false,
+  accountDeletion: false
 };
 
 export const UserProvider = ({ children }: { children: ReactNode }) => {
@@ -152,32 +126,6 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
       ...prevUser,
       ...updates
     }));
-  };
-
-  const addXp = (amount: number) => {
-    setUser((prevUser) => {
-      const newXp = prevUser.xp + amount;
-      const { level, xpToNextLevel } = calculateLevel(newXp);
-      
-      const updatedBadges = prevUser.badges.map(badge => {
-        if (!badge.unlocked && badge.requirement.type === 'xp' && newXp >= badge.requirement.value) {
-          return {
-            ...badge,
-            unlocked: true,
-            unlockedAt: new Date().toISOString()
-          };
-        }
-        return badge;
-      });
-      
-      return {
-        ...prevUser,
-        xp: newXp,
-        level,
-        xpToNextLevel,
-        badges: updatedBadges
-      };
-    });
   };
 
   const unlockBadge = (badgeId: string) => {
@@ -211,7 +159,6 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     <UserContext.Provider value={{ 
       user, 
       updateUser, 
-      addXp, 
       unlockBadge,
       toggleTheme
     }}>
