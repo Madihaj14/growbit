@@ -1,1 +1,0 @@
-GROWBIT - A Habit Tracker
