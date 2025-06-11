@@ -14,11 +14,6 @@ const Header = () => {
         <div className="flex flex-1 items-center justify-between space-x-2">
           <div className="flex items-center space-x-3">
             <Link to="/" className="flex items-center space-x-3">
-              <img 
-                src="/lovable-uploads/dd93f5ba-9b52-4d09-8879-18890ea42935.png" 
-                alt="GrowBit Logo" 
-                className="h-8 w-8"
-              />
               <span className="font-bold text-xl">GrowBit</span>
             </Link>
           </div>
