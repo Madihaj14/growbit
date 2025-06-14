@@ -16,7 +16,7 @@ I built **GrowBit** to simplify and gamify habit tracking. It enables users to c
 
 - Create personalized habits with icons, colors, and difficulty levels
 - Track daily/weekly/custom schedule completions
-- Calculate streaks, award XP, and celebrate milestones
+- Calculate streaks and celebrate milestones
 - Visualize progress with interactive charts and breakdowns
 - Switch between dark/light modes with responsive UI
 
@@ -32,7 +32,6 @@ I built **GrowBit** to simplify and gamify habit tracking. It enables users to c
 - Streak counters, completion stats, best streaks  
 
 ### 🏆 Gamification  
-- XP system with difficulty-based rewards  
 - Confetti effects to celebrate milestones  
 
 ### 📊 Analytics  
@@ -63,7 +62,7 @@ I built **GrowBit** to simplify and gamify habit tracking. It enables users to c
 ## 🧱 Architecture & Code Structure
 
 - Modular structure with reusable components  
-- Custom hooks for logic (streaks, XP, schedules)  
+- Custom hooks for logic (streaks, schedules)  
 - Context-based global state management  
 - Strong TypeScript typings for scalability  
 
@@ -71,7 +70,7 @@ I built **GrowBit** to simplify and gamify habit tracking. It enables users to c
 
 ## 🎯 Challenges Solved
 
-- Complex state handling (dates, XP, completion logic)  
+- Complex state handling (dates, completion logic)  
 - Building an intuitive and encouraging UX  
 - Efficient chart rendering and data visualization  
 - Maintaining smooth performance with animation layers  
