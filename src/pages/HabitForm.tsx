@@ -165,8 +165,8 @@ const HabitForm = () => {
     >
       {/* Header */}
       <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">Create New Habit</h1>
-        <p className="text-growbit-text-secondary">
+        <h1 className="text-3xl font-bold mb-2 dark:text-white">Create New Habit</h1>
+        <p className="text-growbit-text-secondary dark:text-gray-400">
           Define a new habit to track and build consistency.
         </p>
       </div>
@@ -176,8 +176,8 @@ const HabitForm = () => {
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
               {/* Basic Information Section */}
-              <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-                <h2 className="text-xl font-semibold mb-4">Basic Information</h2>
+              <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700">
+                <h2 className="text-xl font-semibold mb-4 dark:text-white">Basic Information</h2>
 
                 <div className="space-y-4">
                   <FormField
@@ -185,7 +185,7 @@ const HabitForm = () => {
                     name="name"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Habit Name</FormLabel>
+                        <FormLabel className="dark:text-white">Habit Name</FormLabel>
                         <FormControl>
                           <Input placeholder="Enter a name for your habit..." {...field} />
                         </FormControl>
@@ -199,7 +199,7 @@ const HabitForm = () => {
                     name="description"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Description (Optional)</FormLabel>
+                        <FormLabel className="dark:text-white">Description (Optional)</FormLabel>
                         <FormControl>
                           <Textarea 
                             placeholder="Add details about your habit..." 
@@ -217,7 +217,7 @@ const HabitForm = () => {
                     name="category"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Category</FormLabel>
+                        <FormLabel className="dark:text-white">Category</FormLabel>
                         <FormControl>
                           <Select 
                             value={field.value} 
@@ -243,8 +243,8 @@ const HabitForm = () => {
               </div>
 
               {/* Frequency Section */}
-              <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-                <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
+              <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700">
+                <h2 className="text-xl font-semibold mb-4 flex items-center gap-2 dark:text-white">
                   <CalendarClock className="text-growbit-accent" size={20} />
                   Frequency
                 </h2>
@@ -255,7 +255,7 @@ const HabitForm = () => {
                     name="frequencyType"
                     render={({ field }) => (
                       <FormItem className="space-y-3">
-                        <FormLabel>How often?</FormLabel>
+                        <FormLabel className="dark:text-white">How often?</FormLabel>
                         <FormControl>
                           <RadioGroup
                             onValueChange={field.onChange}
@@ -266,7 +266,7 @@ const HabitForm = () => {
                               <RadioGroupItem value="daily" id="daily" />
                               <label
                                 htmlFor="daily"
-                                className="flex items-center cursor-pointer"
+                                className="flex items-center cursor-pointer dark:text-white"
                               >
                                 <span className="ml-2">Every day</span>
                               </label>
@@ -276,7 +276,7 @@ const HabitForm = () => {
                               <RadioGroupItem value="weekly" id="weekly" />
                               <label
                                 htmlFor="weekly"
-                                className="flex items-center cursor-pointer"
+                                className="flex items-center cursor-pointer dark:text-white"
                               >
                                 <span className="ml-2">Multiple times per week</span>
                               </label>
@@ -286,7 +286,7 @@ const HabitForm = () => {
                               <RadioGroupItem value="custom" id="custom" />
                               <label
                                 htmlFor="custom"
-                                className="flex items-center cursor-pointer"
+                                className="flex items-center cursor-pointer dark:text-white"
                               >
                                 <span className="ml-2">Specific days</span>
                               </label>
@@ -304,7 +304,7 @@ const HabitForm = () => {
                       name="timesPerWeek"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Times per week</FormLabel>
+                          <FormLabel className="dark:text-white">Times per week</FormLabel>
                           <FormControl>
                             <Select
                               value={field.value?.toString()}
@@ -335,7 +335,7 @@ const HabitForm = () => {
                       name="customDays"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Select days of the week</FormLabel>
+                          <FormLabel className="dark:text-white">Select days of the week</FormLabel>
                           <div className="grid grid-cols-7 gap-2">
                             {DAYS_OF_WEEK.map((day) => (
                               <div key={day.value} className="flex flex-col items-center">
@@ -355,7 +355,7 @@ const HabitForm = () => {
                                 />
                                 <label
                                   htmlFor={`day-${day.value}`}
-                                  className="text-xs cursor-pointer"
+                                  className="text-xs cursor-pointer dark:text-gray-300"
                                 >
                                   {day.label}
                                 </label>
@@ -371,8 +371,8 @@ const HabitForm = () => {
               </div>
 
               {/* Customization Section */}
-              <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-                <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
+              <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700">
+                <h2 className="text-xl font-semibold mb-4 flex items-center gap-2 dark:text-white">
                   <Palette className="text-growbit-accent" size={20} />
                   Customization
                 </h2>
@@ -384,7 +384,7 @@ const HabitForm = () => {
                     name="icon"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Icon</FormLabel>
+                        <FormLabel className="dark:text-white">Icon</FormLabel>
                         <div className="grid grid-cols-4 sm:grid-cols-8 gap-2">
                           {ICONS.map((iconOption) => (
                             <button
@@ -398,7 +398,7 @@ const HabitForm = () => {
                                 "h-10 w-10 flex items-center justify-center rounded-md border",
                                 field.value === iconOption.value
                                   ? "border-growbit-primary bg-growbit-primary/10"
-                                  : "border-gray-200 hover:border-growbit-primary/50"
+                                  : "border-gray-200 dark:border-gray-600 hover:border-growbit-primary/50"
                               )}
                             >
                               <span className="text-lg">{iconOption.value}</span>
@@ -416,7 +416,7 @@ const HabitForm = () => {
                     name="color"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Color</FormLabel>
+                        <FormLabel className="dark:text-white">Color</FormLabel>
                         <div className="grid grid-cols-4 sm:grid-cols-8 gap-2">
                           {COLORS.map((color) => (
                             <button
@@ -430,7 +430,7 @@ const HabitForm = () => {
                                 "h-8 w-8 rounded-full border-2",
                                 field.value === color.value
                                   ? "border-growbit-primary ring-2 ring-growbit-primary/30"
-                                  : "border-gray-200"
+                                  : "border-gray-200 dark:border-gray-600"
                               )}
                               style={{ backgroundColor: color.value }}
                             />
@@ -447,7 +447,7 @@ const HabitForm = () => {
                     name="difficulty"
                     render={({ field }) => (
                       <FormItem className="space-y-3">
-                        <FormLabel>Difficulty Level</FormLabel>
+                        <FormLabel className="dark:text-white">Difficulty Level</FormLabel>
                         <FormControl>
                           <RadioGroup
                             onValueChange={field.onChange}
@@ -469,7 +469,7 @@ const HabitForm = () => {
                                 )}
                               >
                                 <span className="text-xl">⭐</span>
-                                <span className="text-xs font-medium">Easy</span>
+                                <span className="text-xs font-medium dark:text-white">Easy</span>
                               </label>
                             </div>
 
@@ -488,7 +488,7 @@ const HabitForm = () => {
                                 )}
                               >
                                 <span className="text-xl">⭐⭐</span>
-                                <span className="text-xs font-medium">Medium</span>
+                                <span className="text-xs font-medium dark:text-white">Medium</span>
                               </label>
                             </div>
 
@@ -507,7 +507,7 @@ const HabitForm = () => {
                                 )}
                               >
                                 <span className="text-xl">⭐⭐⭐</span>
-                                <span className="text-xs font-medium">Hard</span>
+                                <span className="text-xs font-medium dark:text-white">Hard</span>
                               </label>
                             </div>
                           </RadioGroup>
@@ -539,13 +539,13 @@ const HabitForm = () => {
         {/* Preview Section */}
         <div className="lg:col-span-1">
           <div className="sticky top-6">
-            <div className="bg-white p-5 rounded-xl shadow-sm border border-gray-100">
-              <h3 className="text-lg font-semibold mb-3 flex items-center gap-2">
+            <div className="bg-white dark:bg-gray-800 p-5 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700">
+              <h3 className="text-lg font-semibold mb-3 flex items-center gap-2 dark:text-white">
                 <ListChecks size={18} />
                 Preview
               </h3>
               
-              <div className="bg-gray-50 rounded-lg p-4 shadow-inner">
+              <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 shadow-inner">
                 <div className="habit-card-preview">
                   <div 
                     className="absolute left-0 top-0 h-full w-2 rounded-l-lg"
@@ -554,15 +554,15 @@ const HabitForm = () => {
                   
                   <div className="pl-3">
                     <div className="flex items-center gap-2 mb-2">
-                      <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center">
+                      <div className="w-8 h-8 rounded-full bg-white dark:bg-gray-600 flex items-center justify-center">
                         <span className="text-xl">{habitPreview.icon}</span>
                       </div>
                       <div>
-                        <h4 className="font-medium text-gray-800">
+                        <h4 className="font-medium text-gray-800 dark:text-white">
                           {habitPreview.name || "Habit Name"}
                         </h4>
                         {habitPreview.description && (
-                          <p className="text-xs text-gray-500 line-clamp-1">
+                          <p className="text-xs text-gray-500 dark:text-gray-400 line-clamp-1">
                             {habitPreview.description}
                           </p>
                         )}
@@ -571,20 +571,20 @@ const HabitForm = () => {
                     
                     <div className="space-y-2 text-sm">
                       <div className="flex items-center gap-2">
-                        <Clock size={14} className="text-gray-500" />
-                        <span className="text-gray-600">{getFrequencyText()}</span>
+                        <Clock size={14} className="text-gray-500 dark:text-gray-400" />
+                        <span className="text-gray-600 dark:text-gray-300">{getFrequencyText()}</span>
                       </div>
                       
                       <div className="flex items-center gap-2">
-                        <Flag size={14} className="text-gray-500" />
-                        <span className="text-gray-600">
+                        <Flag size={14} className="text-gray-500 dark:text-gray-400" />
+                        <span className="text-gray-600 dark:text-gray-300">
                           {getDifficultyEmoji()} {habitPreview.difficulty}
                         </span>
                       </div>
                       
                       {habitPreview.category && (
                         <div className="flex items-center gap-2">
-                          <div className="text-xs px-2 py-0.5 bg-gray-200 rounded-full text-gray-700">
+                          <div className="text-xs px-2 py-0.5 bg-gray-200 dark:bg-gray-600 rounded-full text-gray-700 dark:text-gray-300">
                             {habitPreview.category}
                           </div>
                         </div>
