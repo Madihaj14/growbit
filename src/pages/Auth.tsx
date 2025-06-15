@@ -46,10 +46,14 @@ const Auth = () => {
           description: "Successfully signed in.",
         });
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
+      let message = "An unknown error occurred.";
+      if (error instanceof Error) {
+        message = error.message;
+      }
       toast({
         title: "Error",
-        description: error.message,
+        description: message,
         variant: "destructive",
       });
     } finally {
@@ -67,12 +71,12 @@ const Auth = () => {
         transition={{ duration: 0.5 }}
         className="w-full max-w-md z-20"
       >
-        <Card className="border-0 shadow-lg bg-white/90 backdrop-blur-sm">
+        <Card className="border-0 shadow-lg bg-white/90 dark:bg-gray-800 backdrop-blur-sm">
           <CardHeader>
-            <CardTitle className="text-2xl font-poppins">
+            <CardTitle className="text-2xl font-poppins dark:text-white">
               {isSignUp ? "Create Account" : "Welcome Back"}
             </CardTitle>
-            <CardDescription>
+            <CardDescription className="dark:text-gray-400">
               {isSignUp
                 ? "Sign up to start tracking your habits"
                 : "Sign in to continue your journey"}
@@ -82,7 +86,7 @@ const Auth = () => {
             <form onSubmit={handleAuth} className="space-y-4">
               {isSignUp && (
                 <div className="space-y-2">
-                  <label htmlFor="username" className="text-sm font-medium">
+                  <label htmlFor="username" className="text-sm font-medium dark:text-white">
                     Username
                   </label>
                   <Input
@@ -96,7 +100,7 @@ const Auth = () => {
                 </div>
               )}
               <div className="space-y-2">
-                <label htmlFor="email" className="text-sm font-medium">
+                <label htmlFor="email" className="text-sm font-medium dark:text-white">
                   Email
                 </label>
                 <Input
@@ -109,7 +113,7 @@ const Auth = () => {
                 />
               </div>
               <div className="space-y-2">
-                <label htmlFor="password" className="text-sm font-medium">
+                <label htmlFor="password" className="text-sm font-medium dark:text-white">
                   Password
                 </label>
                 <Input
@@ -135,7 +139,7 @@ const Auth = () => {
               <button
                 type="button"
                 onClick={() => setIsSignUp(!isSignUp)}
-                className="text-sm text-growbit-text-secondary hover:text-growbit-primary transition-colors w-full text-center mt-4"
+                className="text-sm text-growbit-text-secondary hover:text-growbit-primary transition-colors w-full text-center mt-4 dark:text-gray-400 dark:hover:text-growbit-primary"
               >
                 {isSignUp
                   ? "Already have an account? Sign in"
