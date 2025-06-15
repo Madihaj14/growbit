@@ -1,10 +1,9 @@
-
 import { Link } from "react-router-dom";
 import { BarChart3, Moon, Sun } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useUser } from "@/contexts/UserContext";
 import ProfileMenu from "./ProfileMenu";
-import logo from "../assets/logo.svg";
+import Logo from "../../assets/logo.svg"; // <-- Corrected import path
 
 const Header = () => {
   const { user, toggleTheme } = useUser();
@@ -15,7 +14,7 @@ const Header = () => {
         <div className="flex flex-1 items-center justify-between space-x-2">
           <div className="flex items-center space-x-3">
             <Link to="/" className="flex items-center space-x-3">
-              <img src={logo} alt="logo" style={{ height: 32 }} />
+              <img src={Logo} alt="logo" style={{ height: 32 }} />
               <span className="font-bold text-xl">GrowBit</span>
             </Link>
           </div>
